@@ -4,13 +4,14 @@
 包名:com.lynwood.garden
 
 | **分类**     | **标题** | **英文** | **模块**              |
-| ------------ | -------- | -------- | --------------------- |
-| 基地 base    | 土壤     | soi      | core web plugin       |
-| 自然 natural | 太阳     | sun      | nacos zipkin sentinel |
-|              | 空气     | air      | flowable quartz       |
-|              | 水       | water    | 业务服务 server       |
-| 生长 grow    | 花       | flower   | 接口服务 api          |
-|              | 工蜂     | bee      | gateway auth admin    |
+| ------------ |--------|--------| --------------------- |
+| 基地 base    | 土壤     | soi    | core web plugin       |
+| 自然 natural | 太阳     | sun    | nacos zipkin sentinel |
+|              | 空气     | air    | flowable quartz       |
+|              | 水      | water  | 业务服务 server       |
+| 生长 grow    | 花      | flower | 接口服务 api          |
+|              | 篱笆     | fence  | gateway auth admin    |
+
 
 
 
