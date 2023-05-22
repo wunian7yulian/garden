@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lynwood.g.base.rock.web.config.FeignConfig,\
+  com.lynwood.g.base.rock.web.exception.GlobalExceptionHandler,\
+  com.lynwood.g.base.rock.web.sentinel.DefaultBlockExceptionHandler,\
+  com.lynwood.g.base.rock.web.log.HttpAspect,\
+  com.lynwood.g.base.rock.web.sentinel.RequestOriginParserDefinition

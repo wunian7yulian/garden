@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lynwood.g.base.rock.redis.config.RedisConfig,\
+  com.lynwood.g.base.rock.redis.util.RedisUtils
+

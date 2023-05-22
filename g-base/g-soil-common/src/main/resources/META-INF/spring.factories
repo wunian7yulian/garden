@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lynwood.g.base.soi.common.configs.GardenBaseConfig\
