@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.lynwood.g.base.rock.mybatis.handler.MybatisPlusConfig,\
+  com.lynwood.g.base.rock.mybatis.config.MybatisPlusConfig,\
   com.lynwood.g.base.rock.mybatis.handler.MyMetaObjectHandler
 

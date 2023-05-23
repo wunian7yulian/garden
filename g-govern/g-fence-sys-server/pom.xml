@@ -12,4 +12,20 @@
 
     <artifactId>g-fence-sys-server</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.lynwood.rd</groupId>
+            <artifactId>g-rock-redis-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lynwood.rd</groupId>
+            <artifactId>g-rock-web-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lynwood.rd</groupId>
+            <artifactId>g-rock-mybatis-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+
 </project>
