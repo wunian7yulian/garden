@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lynwood.g.govern.fence.sys.mapper.SysPermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.lynwood.g.govern.fence.sys.pojo.entity.SysPermission">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="menuId" column="menu_id" jdbcType="BIGINT"/>
+            <result property="urlPerm" column="url_perm" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="btnSign" column="btn_sign" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,menu_id,
+        url_perm,create_time,update_time,
+        update_by,create_by,btn_sign
+    </sql>
+</mapper>
