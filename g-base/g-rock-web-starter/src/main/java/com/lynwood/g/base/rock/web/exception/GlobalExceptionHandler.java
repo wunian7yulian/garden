@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
     public <T> R<T> handleUnknownException(Exception e) {
-        return this.getResult(ResultCode.SYS_ERROR, e.getMessage());
+        return this.getResult(ResultCode.SYS_ERROR, e, e.getMessage());
     }
 
     /**
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.OK)
     @ExceptionHandler(BizException.class)
     public <T> R<T> handleIllegalArgumentException(BizException e) {
-        return this.getResult(e.getResultCode(), e.getMessage());
+        return this.getResult(e.getResultCode(), e, e.getMessage());
     }
 
     /**
@@ -59,7 +59,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(IllegalArgumentException.class)
     public <T> R<T> handleIllegalArgumentException(IllegalArgumentException e) {
-        return this.getResult(ResultCode.PARAM_ERROR, e.getMessage());
+        return this.getResult(ResultCode.PARAM_ERROR, e, e.getMessage());
     }
 
     /**
@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public <T> R<T> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return this.getResult(ResultCode.PARAM_MISMATCH,
+        return this.getResult(ResultCode.PARAM_MISMATCH, e,
                 e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
                         .collect(Collectors.joining(",")));
     }
@@ -86,7 +86,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(TypeMismatchException.class)
     public <T> R<T> handleTypeMismatchException(TypeMismatchException e) {
-        return this.getResult(ResultCode.PARAM_MISMATCH, e.getMessage());
+        return this.getResult(ResultCode.PARAM_MISMATCH, e, e.getMessage());
     }
 
     /**
@@ -98,11 +98,12 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public <T> R<T> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        return this.getResult(ResultCode.PARAM_BODY_CONVERT_FAIL, e.getMessage());
+        return this.getResult(ResultCode.PARAM_BODY_CONVERT_FAIL, e, e.getMessage());
     }
 
-    private <T> R<T> getResult(IResultCode rc, String message) {
+    private <T> R<T> getResult(IResultCode rc, Exception e, String message) {
         log.error("{}，异常原因：{}", rc.getMsg(), message);
+        e.printStackTrace();
         return R.failed(rc, message);
     }
 }

@@ -2,6 +2,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lynwood.g.base.rock.web.config.FeignConfig,\
   com.lynwood.g.base.rock.web.config.Swagger2Config,\
   com.lynwood.g.base.rock.web.config.CustomWebConfig,\
+  com.lynwood.g.base.rock.web.config.WebAppConfig,\
   com.lynwood.g.base.rock.web.exception.GlobalExceptionHandler,\
   com.lynwood.g.base.rock.web.sentinel.DefaultBlockExceptionHandler,\
   com.lynwood.g.base.rock.web.log.HttpAspect,\

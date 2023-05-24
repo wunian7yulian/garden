@@ -18,8 +18,8 @@ public class R<T> implements Serializable {
     private String msg;
 
 
-    public boolean isSuccess() {
-        return this.getCode() != null && ResultCode.SUCCESS.getCode().equals(this.getCode());
+    public static boolean isSuccess(R r) {
+        return r.getCode() != null && ResultCode.SUCCESS.getCode().equals(r.getCode());
     }
 
     /* ------------------------------------------------------------------------------------------------------- 成功 ---------------------- */
@@ -54,7 +54,7 @@ public class R<T> implements Serializable {
         if (ResultCode.SUCCESS == resultCode) {
             result.setData(data);
         } else {
-            result.setMsg(result.getMsg());
+            result.setMsg(resultCode.getMsg());
             if(subMsg!=null) {
                 result.setMsg(subMsg);
             }
