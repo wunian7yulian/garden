@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lynwood.g.base.rock.mybatis.GBaseEntity;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_role_permission")
 @Data
-public class SysRolePermission implements Serializable {
+public class SysRolePermission extends GBaseEntity implements Serializable {
     /**
      * 角色id
      */

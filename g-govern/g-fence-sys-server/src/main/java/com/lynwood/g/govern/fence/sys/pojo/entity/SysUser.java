@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lynwood.g.base.rock.mybatis.GBaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_user")
 @Data
-public class SysUser implements Serializable {
+public class SysUser extends GBaseEntity implements Serializable {
     /**
      * 
      */
@@ -60,31 +61,6 @@ public class SysUser implements Serializable {
      * 用户邮箱
      */
     private String email;
-
-    /**
-     * 逻辑删除标识：0-未删除；1-已删除
-     */
-    private Integer deleted;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 更新者
-     */
-    private Long updateBy;
-
-    /**
-     * 创建者
-     */
-    private Long createBy;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lynwood.g.base.rock.mybatis.GBaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_oauth_client")
 @Data
-public class SysOauthClient implements Serializable {
+public class SysOauthClient extends GBaseEntity implements Serializable {
     /**
      * 
      */
@@ -71,25 +72,7 @@ public class SysOauthClient implements Serializable {
      */
     private String autoapprove;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 更新者
-     */
-    private String updateBy;
-
-    /**
-     * 创建者
-     */
-    private String createBy;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

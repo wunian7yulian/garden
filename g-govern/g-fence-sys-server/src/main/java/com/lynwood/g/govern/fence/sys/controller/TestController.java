@@ -3,8 +3,11 @@ package com.lynwood.g.govern.fence.sys.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lynwood.g.base.soi.common.configs.GardenBaseConfig;
 import com.lynwood.g.base.soi.common.model.R;
+import com.lynwood.g.govern.fence.sys.mapper.SysDeptMapper;
 import com.lynwood.g.govern.fence.sys.mapper.SysUserMapper;
+import com.lynwood.g.govern.fence.sys.pojo.entity.SysDept;
 import com.lynwood.g.govern.fence.sys.pojo.entity.SysUser;
+import com.lynwood.g.govern.fence.sys.service.SysDeptService;
 import com.lynwood.g.govern.fence.sys.service.SysUserService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,8 @@ public class TestController {
     private final SysUserMapper sysUserMapper;
     private final SysUserService sysUserService;
 
+    private final SysDeptService sysDeptService;
+    private final SysDeptMapper sysDeptMapper;
     private final GardenBaseConfig gardenBaseConfig;
 
     @GetMapping("/test")
@@ -50,5 +55,20 @@ public class TestController {
         sysUserService.changeUser(sysUser);
         return R.ok();
     }
+    @GetMapping("/save")
+    public R save() {
+        SysUser sysUser = new SysUser();
+        sysUser.setNickname("哈哈");
+        sysUserService.save(sysUser);
 
+        SysUser byId = sysUserService.getById(sysUser.getId());
+        byId.setMobile("???");
+        sysUserService.updateById(byId);
+        //sysUserService.update(sysUser,null);
+        //SysDept sysDept = new SysDept();
+        //sysDept.setDeptName("11111");
+        //sysDeptMapper.insert(sysDept);
+        //sysDeptService.save(sysDept);
+        return R.ok();
+    }
 }

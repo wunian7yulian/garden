@@ -19,6 +19,8 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
             <result property="createBy" column="create_by" jdbcType="BIGINT"/>
+            <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+            <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -26,6 +28,7 @@
         gender,password,avatar,
         mobile,status,email,
         deleted,create_time,update_time,
-        update_by,create_by
+        update_by,create_by,update_user,
+        create_user
     </sql>
 </mapper>

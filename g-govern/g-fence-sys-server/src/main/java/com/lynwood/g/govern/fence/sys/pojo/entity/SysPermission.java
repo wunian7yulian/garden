@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lynwood.g.base.rock.mybatis.GBaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_permission")
 @Data
-public class SysPermission implements Serializable {
+public class SysPermission extends GBaseEntity implements Serializable {
     /**
      * 主键
      */
@@ -35,26 +36,6 @@ public class SysPermission implements Serializable {
      * URL权限标识
      */
     private String urlPerm;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 更新者
-     */
-    private String updateBy;
-
-    /**
-     * 创建者
-     */
-    private String createBy;
 
     /**
      * 按钮标识

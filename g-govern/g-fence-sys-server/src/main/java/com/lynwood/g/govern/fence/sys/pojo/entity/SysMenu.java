@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lynwood.g.base.rock.mybatis.GBaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="sys_menu")
 @Data
-public class SysMenu implements Serializable {
+public class SysMenu extends GBaseEntity implements Serializable {
     /**
      * 
      */
@@ -61,25 +62,6 @@ public class SysMenu implements Serializable {
      */
     private String redirect;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 
-     */
-    private Long createBy;
-
-    /**
-     * 
-     */
-    private Long updateBy;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
