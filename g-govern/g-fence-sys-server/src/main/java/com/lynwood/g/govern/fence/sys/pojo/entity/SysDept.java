@@ -8,8 +8,6 @@ import com.lynwood.g.base.rock.mybatis.GBaseEntity;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 部门表
@@ -33,7 +31,6 @@ public class SysDept extends GBaseEntity implements Serializable {
      * 父级id
      */
     private Long fId;
-
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
