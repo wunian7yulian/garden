@@ -1,6 +1,7 @@
 package com.lynwood.g.govern.alley.gateway.config.swagger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
@@ -10,7 +11,9 @@ import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 使用Spring Boot单体架构集成swagger时，是通过包路径进行业务分组，然后在前端进行不同模块的展示，而在微服务架构下，单个服务类似于原来业务组；
@@ -20,6 +23,9 @@ import java.util.List;
 @Primary
 @Configuration
 public class SwaggerResourceConfig implements SwaggerResourcesProvider {
+    @Value("${spring.application.name}")
+    private String applicationName;
+
     @Autowired
     private RouteLocator routeLocator;
     @Autowired
@@ -30,27 +36,31 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
 
     @Override
     public List<SwaggerResource> get() {
-
+        //接口资源列表
         List<SwaggerResource> resources = new ArrayList<>();
-        List<String> routes = new ArrayList<>();
-        // 取出gateway的route
-        routeLocator.getRoutes().subscribe(route -> routes.add(route.getId()));
-        // 结合配置的route-路径(Path)，和route过滤，只获取在枚举中说明的route节点
-        gatewayProperties.getRoutes().stream().filter(routeDefinition -> routes.contains(routeDefinition.getId()))
-                .forEach(routeDefinition -> routeDefinition.getPredicates().stream()
-                        .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
-                        .forEach(predicateDefinition -> resources.add(swaggerResource(routeDefinition.getId(),
-                                predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                        .replace("/**", API_URI)))
-                        )
-                );
+        //服务名称列表
+        List<String> routeHosts = new ArrayList<>();
+
+        // 获取所有可用的应用名称
+        routeLocator.getRoutes()
+                .filter(route -> route.getUri().getHost() != null)
+                .filter(route -> !applicationName.equals(route.getUri().getHost()))
+                .subscribe(route -> routeHosts.add(route.getUri().getHost()));
+
+        // 去重，多负载服务只添加一次
+        Set<String> existsServer = new HashSet<>();
+        routeHosts.forEach(host -> {
+            // 拼接url
+            String url = "/" + host + API_URI;
+            //不存在则添加
+            if (!existsServer.contains(url)) {
+                existsServer.add(url);
+                SwaggerResource swaggerResource = new SwaggerResource();
+                swaggerResource.setUrl(url);
+                swaggerResource.setName(host);
+                resources.add(swaggerResource);
+            }
+        });
         return resources;
-    }
-    private SwaggerResource swaggerResource(String name, String location) {
-        SwaggerResource swaggerResource = new SwaggerResource();
-        swaggerResource.setName(name);
-        swaggerResource.setLocation(location);
-        swaggerResource.setSwaggerVersion("3.0");
-        return swaggerResource;
     }
 }

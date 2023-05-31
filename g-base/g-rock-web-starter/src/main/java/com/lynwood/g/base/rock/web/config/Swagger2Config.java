@@ -43,7 +43,7 @@ public class Swagger2Config {
                 .forCodeGeneration(true)
                 .select()
                 .paths(PathSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.dyd.rdcenter"))
+                .apis(RequestHandlerSelectors.basePackage("com.lynwood.g"))
                 .build()
                 .apiInfo(new ApiInfoBuilder()
                         .title(serviceName + "接口文档")
