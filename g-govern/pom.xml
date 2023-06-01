@@ -16,5 +16,6 @@
         <module>g-fence-auth-server</module>
         <module>g-alley-gateway-server</module>
         <module>g-fence-sys-server</module>
+        <module>g-fence-sys-client</module>
     </modules>
 </project>

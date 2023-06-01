@@ -162,6 +162,11 @@
                 <artifactId>g-rock-mybatis-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.lynwood.rd</groupId>
+                <artifactId>g-fence-sys-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

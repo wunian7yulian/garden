@@ -41,8 +41,8 @@ public enum ResultCode implements IResultCode, Serializable {
     B_EXECUTION_ERROR("B00001", "执行异常"),
     /* ---------------------------- 二级宏观错误码:B01(系统) ---------------------- */
     SYS_ERROR("B01001", "系统异常"),
-    SYS_FLOW_LIMITING("B01001", "系统访问限流"),
-    SYS_DEGRADATION("B01002", "系统功能降级"),
+    SYS_FLOW_LIMITING("B01002", "系统访问限流"),
+    SYS_DEGRADATION("B01003", "系统功能降级"),
 
     /* ---------------------------- 二级宏观错误码:B02(业务) ---------------------- */
     BIZ_ERROR("B02001", "业务异常"),

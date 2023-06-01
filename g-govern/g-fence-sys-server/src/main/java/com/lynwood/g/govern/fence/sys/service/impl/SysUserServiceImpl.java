@@ -1,5 +1,6 @@
 package com.lynwood.g.govern.fence.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lynwood.g.govern.fence.sys.pojo.entity.SysUser;
 import com.lynwood.g.govern.fence.sys.service.SysUserService;
@@ -19,11 +20,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
 
     @Override
     public SysUser getUserByUserName(String username) {
-        SysUser sysUser = new SysUser();
-        sysUser.setId(1L);
-        sysUser.setNickname("张三");
-        log.info("1");
-        return sysUser;
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername,username));
     }
 
     @Override

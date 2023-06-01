@@ -3,6 +3,7 @@ package com.lynwood.g.base.rock.web.config;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -16,6 +17,7 @@ import java.util.Enumeration;
  * @author： Lynwood
  */
 @Configuration
+@EnableFeignClients(basePackages = "com.lynwood.g")
 public class FeignConfig {
     @Value("${spring.application.name}")
     private String applicationName;
