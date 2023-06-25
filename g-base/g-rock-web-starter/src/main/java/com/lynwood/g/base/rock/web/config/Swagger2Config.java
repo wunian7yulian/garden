@@ -77,8 +77,8 @@ public class Swagger2Config {
         ParameterBuilder aParameterBuilder = new ParameterBuilder();
         aParameterBuilder
                 .parameterType("header")
-                .name("Authorization")
-                .description("header中Authorization字段用于认证,并以Bearer 开头")
+                .name("G-Access-Token")
+                .description("header中G-Access-Token字段用于认证,并以Bearer 开头")
                 .modelRef(new ModelRef("String"))
                 //非必需 这里是全局配置 在登陆/token刷新/注册/找回密码时是不用
                 .required(false).build();

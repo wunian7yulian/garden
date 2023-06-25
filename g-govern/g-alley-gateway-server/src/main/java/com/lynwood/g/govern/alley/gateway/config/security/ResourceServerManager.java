@@ -56,7 +56,7 @@ public class ResourceServerManager implements ReactiveAuthorizationManager<Autho
 
         // 如果token为空 或者token不合法 则进行拦截
         String restfulPath = method + ":" + path; // RESTFul接口权限设计 @link https://www.cnblogs.com/haoxianrui/p/14961707.html
-        String token = request.getHeaders().getFirst(SecurityConstants.AUTHORIZATION_KEY);
+        String token = request.getHeaders().getFirst(SecurityConstants.ACCESS_TOKEN);
         if (StrUtil.isBlank(token) || !StrUtil.startWithIgnoreCase(token, SecurityConstants.JWT_PREFIX)) {
             return Mono.just(new AuthorizationDecision(false));
         }

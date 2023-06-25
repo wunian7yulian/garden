@@ -13,7 +13,7 @@ public interface SecurityConstants {
     /**
      * 认证请求头key
      */
-    String AUTHORIZATION_KEY = "Authorization";
+    String ACCESS_TOKEN = "G-Access-Token";
 
     /**
      * JWT令牌前缀
