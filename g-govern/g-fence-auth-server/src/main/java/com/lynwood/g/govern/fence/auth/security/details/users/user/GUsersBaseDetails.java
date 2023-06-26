@@ -1,10 +1,7 @@
-package com.lynwood.g.govern.fence.auth.security.details.users;
+package com.lynwood.g.govern.fence.auth.security.details.users.user;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,16 +10,13 @@ import java.util.Collection;
 /**
  * @author： Lynwood
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class MultiUsersBaseDetails implements UserDetails {
+@Getter
+@Setter
+public class GUsersBaseDetails implements UserDetails {
     /**
      * 扩展字段
      */
     private Long userId;
-
     /**
      * 默认字段
      */
@@ -33,6 +27,9 @@ public class MultiUsersBaseDetails implements UserDetails {
     private String nickname;
     private String password;
     private Boolean enabled;
+
+    private Long groupId;
+
     private Collection<? extends GrantedAuthority> authorities;
 
 
@@ -65,4 +62,6 @@ public class MultiUsersBaseDetails implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
+
 }

@@ -56,8 +56,8 @@ public class ResourceServerManager implements ReactiveAuthorizationManager<Autho
 
         // 如果token为空 或者token不合法 则进行拦截
         String restfulPath = method + ":" + path; // RESTFul接口权限设计 @link https://www.cnblogs.com/haoxianrui/p/14961707.html
-        String token = request.getHeaders().getFirst(SecurityConstants.ACCESS_TOKEN);
-        if (StrUtil.isBlank(token) || !StrUtil.startWithIgnoreCase(token, SecurityConstants.JWT_PREFIX)) {
+        String token = request.getHeaders().getFirst(SecurityConstants.G_ACCESS_TOKEN);
+        if (StrUtil.isBlank(token) || !StrUtil.startWithIgnoreCase(token, SecurityConstants.G_JWT_PREFIX)) {
             return Mono.just(new AuthorizationDecision(false));
         }
 
@@ -81,7 +81,7 @@ public class ResourceServerManager implements ReactiveAuthorizationManager<Autho
                 .flatMapIterable(Authentication::getAuthorities)
                 .map(GrantedAuthority::getAuthority)
                 .any(authority -> {
-                    String roleCode = authority.substring(SecurityConstants.JWT_AUTHORITY_PREFIX.length()); // 用户的角色
+                    String roleCode = authority.substring(SecurityConstants.G_JWT_AUTHORITY_PREFIX.length()); // 用户的角色
                     boolean hasAuthorized = CollectionUtil.isNotEmpty(authorizedRoles) && authorizedRoles.contains(roleCode);
                     return hasAuthorized;
                 })

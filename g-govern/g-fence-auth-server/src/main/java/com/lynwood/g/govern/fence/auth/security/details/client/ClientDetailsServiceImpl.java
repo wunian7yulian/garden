@@ -1,7 +1,7 @@
 package com.lynwood.g.govern.fence.auth.security.details.client;
 
 import com.lynwood.g.base.soi.common.model.R;
-import com.lynwood.g.govern.fence.auth.security.enums.PasswordEncoderTypeEnum;
+import com.lynwood.g.govern.fence.auth.security.enums.PasswordEncoderType;
 import com.lynwood.g.govern.fence.sys.dto.OAuth2ClientDTO;
 import com.lynwood.g.govern.fence.sys.feign.OAuthClientFeignClient;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
                     client.getAuthorizedGrantTypes(),
                     client.getAuthorities(),
                     client.getWebServerRedirectUri());
-            clientDetails.setClientSecret(PasswordEncoderTypeEnum.NOOP.getPrefix() + client.getClientSecret());
+            clientDetails.setClientSecret(PasswordEncoderType.NOOP.getPrefix() + client.getClientSecret());
             clientDetails.setAccessTokenValiditySeconds(client.getAccessTokenValidity());
             clientDetails.setRefreshTokenValiditySeconds(client.getRefreshTokenValidity());
             return clientDetails;

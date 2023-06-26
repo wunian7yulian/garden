@@ -1,7 +1,8 @@
 package com.lynwood.g.govern.fence.auth.security.jwt;
 
-
-import com.lynwood.g.govern.fence.auth.security.details.users.MultiUsersBaseDetails;
+import com.lynwood.g.govern.fence.auth.security.details.users.MultiUsersDetailServiceImpl;
+import com.lynwood.g.govern.fence.auth.security.details.users.user.GUsersBaseDetails;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,11 +22,10 @@ import java.util.Map;
  * @since 2022/08/30
  */
 @Component
-public class DydSysUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
-    private static final String USER_ID = "userId";
-    private static final String NICKNAME = "nickname";
+@AllArgsConstructor
+public class GUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 
-    private static final String N_A = "N/A";
+    private final MultiUsersDetailServiceImpl multiUsersDetailService;
 
     /**
      * @param authentication an authentication representing a user
@@ -48,13 +48,8 @@ public class DydSysUserAuthenticationConverter extends DefaultUserAuthentication
     @Override
     public Authentication extractAuthentication(Map<String, ?> map) {
         if (map.containsKey(USERNAME)) {
-            Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
-            String username = (String) map.get(USERNAME);
-            String nickname = (String) map.get(NICKNAME);
-
-            Integer userId = (Integer) map.get(USER_ID);
-            MultiUsersBaseDetails sysUserDetails = new MultiUsersBaseDetails(userId.longValue(),username,nickname,null,true,authorities);
-            return new UsernamePasswordAuthenticationToken(sysUserDetails, N_A, authorities);
+            GUsersBaseDetails userDetails = multiUsersDetailService.loadUserByUsername((String) map.get(USERNAME));
+            return new UsernamePasswordAuthenticationToken(userDetails, "N/A", userDetails.getAuthorities());
         }
         return null;
     }

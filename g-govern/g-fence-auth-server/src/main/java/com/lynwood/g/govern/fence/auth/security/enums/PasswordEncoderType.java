@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * @author： Lynwood
  */
-public enum PasswordEncoderTypeEnum {
+public enum PasswordEncoderType {
 
     BCRYPT("{bcrypt}","BCRYPT加密"),
     NOOP("{noop}","无加密明文");
@@ -16,7 +16,7 @@ public enum PasswordEncoderTypeEnum {
 
 
 
-    PasswordEncoderTypeEnum(String prefix, String desc){
+    PasswordEncoderType(String prefix, String desc){
         this.prefix=prefix;
     }
 

@@ -1,8 +1,10 @@
 package com.lynwood.g.govern.fence.auth.config;
 
+
+import com.lynwood.g.base.soi.common.constants.SecurityConstants;
 import com.lynwood.g.govern.fence.auth.security.details.client.ClientDetailsServiceImpl;
-import com.lynwood.g.govern.fence.auth.security.details.users.MultiUsersBaseDetails;
-import com.lynwood.g.govern.fence.auth.security.jwt.DydSysUserAuthenticationConverter;
+import com.lynwood.g.govern.fence.auth.security.details.users.user.GUsersBaseDetails;
+import com.lynwood.g.govern.fence.auth.security.jwt.GUserAuthenticationConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,10 +21,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.CompositeTokenGranter;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.TokenGranter;
-import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
-import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.*;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.stereotype.Component;
@@ -91,7 +90,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Autowired
-    private DydSysUserAuthenticationConverter dydSysUserAuthenticationConverter;
+    private GUserAuthenticationConverter gUserAuthenticationConverter;
     /**
      * 使用非对称加密算法对token签名
      */
@@ -105,22 +104,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             @Override
             public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
                 // 与登录时候放进去的UserDetail实现类一直查看link{SecurityConfiguration}
-                MultiUsersBaseDetails usersBaseDetails = (MultiUsersBaseDetails) authentication.getUserAuthentication().getPrincipal();
+                GUsersBaseDetails usersBaseDetails = (GUsersBaseDetails) authentication.getUserAuthentication().getPrincipal();
                 /* 自定义一些token属性 ***/
                 final Map<String, Object> additionalInformation = new HashMap<>(18);
-                String userName = usersBaseDetails.getUsername();
-                Long userId = usersBaseDetails.getUserId();
-                String nickname = usersBaseDetails.getNickname();
-                additionalInformation.put("userName", userName);
-                additionalInformation.put("userId", userId);
-                additionalInformation.put("nickname",nickname);
+                additionalInformation.put(SecurityConstants.G_JWT_USER_ACCOUNT_KEY, usersBaseDetails.getUsername());
+                additionalInformation.put(SecurityConstants.G_JWT_USER_ID_KEY, usersBaseDetails.getUserId());
+                additionalInformation.put(SecurityConstants.G_JWT_USER_NICKNAME_KEY, usersBaseDetails.getNickname());
+                additionalInformation.put(SecurityConstants.G_JWT_GROUP_KEY, usersBaseDetails.getGroupId());
                 ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
                 return super.enhance(accessToken, authentication);
             }
         };
         converter.setKeyPair(keyPair());
         ((DefaultAccessTokenConverter) converter.getAccessTokenConverter())
-                .setUserTokenConverter(dydSysUserAuthenticationConverter);
+                .setUserTokenConverter(gUserAuthenticationConverter);
         return converter;
     }
     @Value("${spring.profiles.active}")

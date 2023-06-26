@@ -70,8 +70,8 @@ public class ResourceServerConfig {
     @Bean
     public Converter<Jwt, ? extends Mono<? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(SecurityConstants.JWT_AUTHORITY_PREFIX);
-        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(SecurityConstants.JWT_AUTHORITIES_KEY);
+        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(SecurityConstants.G_JWT_AUTHORITY_PREFIX);
+        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(SecurityConstants.G_JWT_AUTHORITIES_KEY);
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);

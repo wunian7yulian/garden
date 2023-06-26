@@ -30,15 +30,15 @@ public class SecurityGlobalFilter implements GlobalFilter, Ordered {
 
         ServerHttpRequest request = exchange.getRequest();
         // 不是正确的的JWT不做解析处理
-        String token = request.getHeaders().getFirst(SecurityConstants.ACCESS_TOKEN);
-        if (StrUtil.isBlank(token) || !StrUtil.startWithIgnoreCase(token, SecurityConstants.JWT_PREFIX)) {
+        String token = request.getHeaders().getFirst(SecurityConstants.G_ACCESS_TOKEN);
+        if (StrUtil.isBlank(token) || !StrUtil.startWithIgnoreCase(token, SecurityConstants.G_JWT_PREFIX)) {
             return chain.filter(exchange);
         }
         // 解析JWT获取jti，以jti/user_id为key判断redis的黑名单列表是否存在，存在则拦截访问
-        token = StrUtil.replaceIgnoreCase(token, SecurityConstants.JWT_PREFIX, Strings.EMPTY);
+        token = StrUtil.replaceIgnoreCase(token, SecurityConstants.G_JWT_PREFIX, Strings.EMPTY);
         String payload = StrUtil.toString(JWSObject.parse(token).getPayload());
         request = exchange.getRequest().mutate()
-                .header(SecurityConstants.JWT_PAYLOAD_KEY, URLEncoder.encode(payload, "UTF-8"))
+                .header(SecurityConstants.G_JWT_PAYLOAD_KEY, URLEncoder.encode(payload, "UTF-8"))
                 .build();
         exchange = exchange.mutate().request(request).build();
         return chain.filter(exchange);
